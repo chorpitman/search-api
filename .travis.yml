@@ -5,3 +5,9 @@ script: mvn clean install
 cache:
   directories:
   - $HOME/.m2
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS loopme_db;'
