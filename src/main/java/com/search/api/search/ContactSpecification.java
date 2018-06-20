@@ -28,7 +28,7 @@ public class ContactSpecification implements Specification<Contact> {
         String operation = criteria.getOperation();
         Object value = criteria.getValue();
 
-        Predicate like = cb.like(root.get(criteria.getKey()), criteria.getValue().toString());
+        Predicate like = cb.notLike(root.get(criteria.getKey()), "%" + criteria.getValue().toString() + "%");
 
         return like;
     }
