@@ -24,7 +24,7 @@ public class ContactController {
     @RequestMapping(value = "/contacts", method = RequestMethod.GET)
     public ResponseEntity<Collection<Contact>> getContacts(@RequestParam(name = "nameFilter") final String nameFilter) {
         LOGGER.debug("About process: get contacts by filter phrase: {}", nameFilter);
-        Collection<Contact> contacts = contactService.findContactByName(nameFilter);
+        Collection<Contact> contacts = contactService.findContactByRegEx(nameFilter);
         if (contacts.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }

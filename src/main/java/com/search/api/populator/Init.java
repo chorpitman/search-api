@@ -28,6 +28,9 @@ public class Init {
         Contact contact4 = Contact.builder()
                 .name("Zork").build();
 
-        contactRepository.saveAll(Arrays.asList(contact1, contact2, contact3, contact4));
+        Contact contact5 = Contact.builder()
+                .name("Anton").build();
+
+        contactRepository.saveAll(Arrays.asList(contact1, contact2, contact3, contact4, contact5));
     }
 }
