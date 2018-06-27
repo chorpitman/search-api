@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -31,14 +31,14 @@ public class ContactServiceImpl implements ContactService {
             return Collections.emptyList();
         }
 
-        //get all contacts
         List<Contact> contacts = contactRepository.findAll(Sort.by("name").ascending());
 
-        //prepare list for matched Contacts
-        List<Contact> matchedContacts = contacts
-                .stream()
-                .filter(contact -> Pattern.compile(regex).matcher(contact.getName()).find())
-                .collect(Collectors.toList());
+        List<Contact> matchedContacts = new ArrayList<>();
+        for (Contact contact : contacts) {
+            if (Pattern.compile(regex).matcher(contact.getName()).find()) {
+                matchedContacts.add(contact);
+            }
+        }
 
         if (matchedContacts.isEmpty()) {
             return Collections.emptyList();
