@@ -11,4 +11,3 @@ services:
 
 before_install:
   - psql -c 'create database api_db;' -U postgres
-#  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
