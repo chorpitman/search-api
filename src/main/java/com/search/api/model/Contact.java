@@ -1,5 +1,6 @@
 package com.search.api.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 
 
 @Data
+@Builder
 @Entity
 @Table(name = "contacts")
 public class Contact {
