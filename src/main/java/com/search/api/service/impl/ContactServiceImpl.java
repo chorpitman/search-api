@@ -35,7 +35,7 @@ public class ContactServiceImpl implements ContactService {
 
         List<Contact> matchedContacts = new ArrayList<>();
         for (Contact contact : contacts) {
-            if (Pattern.compile(regex).matcher(contact.getName()).find()) {
+            if (!Pattern.compile(regex).matcher(contact.getName()).find()) {
                 matchedContacts.add(contact);
             }
         }
