@@ -28,6 +28,7 @@ or make changes in application.properties file
 Endpoints  
 ----------
 > GET `http://localhost:8080/hello/contacts?nameFilter=^A.*$`
+
 > GET `http://localhost:8080/hello/contacts?nameFilter=^.*[AEI].*$`
 
 Before you send request you make sure that pattern is url encoded.
