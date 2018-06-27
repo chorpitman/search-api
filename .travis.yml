@@ -7,8 +7,8 @@ cache:
   - $HOME/.m2
 
 services:
-  - mysql
+  - postgresql
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS loopme_db'
-  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+  - psql -c 'create database api_db;' -U postgres
+#  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
