@@ -3,12 +3,14 @@ package com.search.api.populator;
 
 import com.search.api.model.Contact;
 import com.search.api.repository.ContactRepository;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-
-import static java.util.Arrays.asList;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Component
 public class Init {
@@ -18,31 +20,25 @@ public class Init {
     @PostConstruct
     void init() {
         if (contactRepository.findAll().isEmpty()) {
-            Contact contact1 = Contact.builder()
-                    .name("Dmytro").build();
-
-            Contact contact2 = Contact.builder()
-                    .name("Mrok").build();
-
-            Contact contact3 = Contact.builder()
-                    .name("Azur").build();
-
-            Contact contact4 = Contact.builder()
-                    .name("Zork").build();
-
-            Contact contact5 = Contact.builder()
-                    .name("Anton").build();
-
-            Contact contact6 = Contact.builder()
-                    .name("Bruno").build();
-
-            Contact contact7 = Contact.builder()
-                    .name("Cody").build();
-
-            Contact contact8 = Contact.builder()
-                    .name("Irson").build();
-
-            contactRepository.saveAll(asList(contact1, contact2, contact3, contact4, contact5, contact6, contact7, contact8));
+            contactRepository.saveAll(generateUsers(4_000));
         }
+    }
+
+    private List<Contact> generateUsers(final int countUser) {
+        List<Contact> contacts = new ArrayList<>();
+        if (countUser > 0) {
+            for (int i = 0; i < countUser; i++) {
+                contacts.add(Contact.builder()
+                        .name(generateName())
+                        .build());
+
+            }
+            return contacts;
+        }
+        return Collections.emptyList();
+    }
+
+    private String generateName() {
+        return RandomStringUtils.randomAlphabetic(7);
     }
 }
