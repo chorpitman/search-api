@@ -29,11 +29,9 @@ public class CustomRepositoryImpl implements CustomRepository {
         return getContact(regexp, nxtTokenPage);
     }
 
-    private List<Contact> getContact(final String regexp, final int lastId) {
+    private List<Contact> getContact(final String regexp, int lastId) {
         List<Contact> resultList = new ArrayList<>(DEFAULT_PAGE_SIZE);
-
         boolean processing = true;
-
         while (processing) {
             List<Contact> contactList = getContactList(lastId);
 
@@ -46,6 +44,8 @@ public class CustomRepositoryImpl implements CustomRepository {
             if (resultList.size() >= DEFAULT_PAGE_SIZE || contactList.size() < BATCH_MAX_RESULT) {
                 processing = false;
             }
+
+            lastId = contactList.get(contactList.size() - 1).getId();
         }
 
         return resultList;
