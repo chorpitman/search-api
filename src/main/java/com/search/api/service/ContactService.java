@@ -1,7 +1,7 @@
 package com.search.api.service;
 
 
-import com.search.api.controller.PageDto;
+import com.search.api.controller.dto.PageDto;
 
 public interface ContactService {
 

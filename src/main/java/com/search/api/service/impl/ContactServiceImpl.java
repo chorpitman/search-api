@@ -1,7 +1,7 @@
 package com.search.api.service.impl;
 
 
-import com.search.api.controller.PageDto;
+import com.search.api.controller.dto.PageDto;
 import com.search.api.model.Contact;
 import com.search.api.repository.ContactRepository;
 import com.search.api.service.ContactService;

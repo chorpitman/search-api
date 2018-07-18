@@ -1,5 +1,6 @@
 package com.search.api.controller;
 
+import com.search.api.controller.dto.PageDto;
 import com.search.api.service.ContactService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

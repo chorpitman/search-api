@@ -1,4 +1,4 @@
-package com.search.api.controller;
+package com.search.api.controller.dto;
 
 import com.search.api.model.Contact;
 import lombok.Builder;
