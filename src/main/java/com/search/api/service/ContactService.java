@@ -1,10 +1,9 @@
 package com.search.api.service;
 
 
-import com.search.api.model.Contact;
-
-import java.util.Collection;
+import com.search.api.controller.dto.PageDto;
 
 public interface ContactService {
-    Collection<Contact> findContactByRegEx(final String name);
+
+    PageDto findContactsByReqExp(final String name, final Integer nextTokenPage);
 }
