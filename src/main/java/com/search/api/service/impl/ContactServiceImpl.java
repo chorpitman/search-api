@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class ContactServiceImpl implements ContactService {
     private static final int DEFAULT_PAGE_SIZE = 20;
@@ -43,6 +44,6 @@ public class ContactServiceImpl implements ContactService {
     }
 
     private List<Contact> trimContact(final List<Contact> contactList) {
-        return contactList.subList(1, DEFAULT_PAGE_SIZE);
+        return contactList.subList(0, DEFAULT_PAGE_SIZE);
     }
 }
