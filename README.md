@@ -28,8 +28,8 @@ or make changes in application.properties file
   
 Endpoints 
 ----------  
- - GET `http://localhost:8080/hello/contacts?nameFilter=^A.*$`    
- - GET `http://localhost:8080/hello/contacts?nameFilter=^.*[AEI].*$`
+ - GET `http://localhost:8080/hello/contacts/page/0/?nameFilter=^A.*$`    
+ - GET `http://localhost:8080/hello/contacts/0/?nameFilter=^.*[AEI].*$`
 
   
 Before you send request you make sure that pattern is url encoded.  
@@ -46,3 +46,10 @@ Run Project
 -----------  
 
     $ mvn spring-boot:run
+    
+Changes 
+-----------
+- changed url request. Added /page/
+- added pagination. now return 20 results
+- added fixed batch size for request to db
+
