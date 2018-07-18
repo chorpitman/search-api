@@ -25,14 +25,14 @@ public class CustomRepositoryImpl implements CustomRepository {
     public List<Contact> findContacts(final String regexp, final Integer nxtTokenPage) {
         if (Objects.isNull(nxtTokenPage)) {
             List<Contact> contact = getContact(regexp, 0);
-            if (!checkSize(contact)) {
+            if (isContactHasDefaultPageSize(contact)) {
                 return trimContactList(contact);
             }
             return contact;
         }
 
         List<Contact> contact = getContact(regexp, nxtTokenPage);
-        if (!checkSize(contact)) {
+        if (isContactHasDefaultPageSize(contact)) {
             return trimContactList(contact);
         }
         return contact;
@@ -71,8 +71,8 @@ public class CustomRepositoryImpl implements CustomRepository {
                 .getResultList();
     }
 
-    private boolean checkSize(final List<Contact> trimContact) {
-        return trimContact.size() == DEFAULT_PAGE_SIZE;
+    private boolean isContactHasDefaultPageSize(final List<Contact> contacts) {
+        return contacts.size() > DEFAULT_PAGE_SIZE;
     }
 
     private List<Contact> trimContactList(final List<Contact> contactList) {
