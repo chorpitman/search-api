@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CustomRepository {
 
-    List<Contact> findWithStream(final String regexp, final Integer nxtTokenPage);
+    List<Contact> findContacts(final String regexp, final Integer nxtTokenPage);
 }

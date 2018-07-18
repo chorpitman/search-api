@@ -1,6 +1,5 @@
 package com.search.api.controller;
 
-import com.search.api.model.Contact;
 import com.search.api.service.ContactService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -24,13 +22,13 @@ public class ContactController {
     private ContactService contactService;
 
     @RequestMapping(value = "/contacts/page/{nextPageToken}/", method = RequestMethod.GET)
-    public ResponseEntity<List<Contact>> getContacts(@RequestParam(name = "nameFilter") final String nameFilter,
-                                                     @PathVariable(name = "nextPageToken") final Integer nextPageToken) {
-        LOGGER.debug("About process: get contacts by filter phrase: '{}'. Next page token '{}'.", nameFilter, nextPageToken);
-        List<Contact> contact = contactService.findByStream(nameFilter, nextPageToken);
-        if (Objects.isNull(contact)) {
+    public ResponseEntity<PageDto> getContacts(@RequestParam(name = "nameFilter") final String regexp,
+                                               @PathVariable(name = "nextPageToken") final Integer nextPageToken) {
+        LOGGER.debug("About process: get contacts by filter phrase: '{}'. Next page token '{}'.", regexp, nextPageToken);
+        PageDto contactsPageDto = contactService.findContactsByReqExp(regexp, nextPageToken);
+        if (Objects.isNull(contactsPageDto)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        return ResponseEntity.status(HttpStatus.OK).body(contact);
+        return ResponseEntity.status(HttpStatus.OK).body(contactsPageDto);
     }
 }
