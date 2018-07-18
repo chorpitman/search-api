@@ -43,7 +43,6 @@ public class CustomRepositoryImpl implements CustomRepository {
         boolean processing = true;
         while (processing) {
             List<Contact> contactList = getContactList(lastId);
-
             List<Contact> filteredList = contactList.stream()
                     .filter(contact -> contact.getName().matches(regexp))
                     .collect(Collectors.toList());
@@ -52,6 +51,10 @@ public class CustomRepositoryImpl implements CustomRepository {
 
             if (resultList.size() >= DEFAULT_PAGE_SIZE || contactList.size() < BATCH_MAX_RESULT) {
                 processing = false;
+            }
+
+            if (contactList.size() == 0) {
+                return resultList;
             }
 
             lastId = contactList.get(contactList.size() - 1).getId();
