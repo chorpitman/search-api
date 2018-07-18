@@ -24,9 +24,18 @@ public class CustomRepositoryImpl implements CustomRepository {
     @Override
     public List<Contact> findContacts(final String regexp, final Integer nxtTokenPage) {
         if (Objects.isNull(nxtTokenPage)) {
-            return getContact(regexp, 0);
+            List<Contact> contact = getContact(regexp, 0);
+            if (!checkSize(contact)) {
+                return trimContactList(contact);
+            }
+            return contact;
         }
-        return getContact(regexp, nxtTokenPage);
+
+        List<Contact> contact = getContact(regexp, nxtTokenPage);
+        if (!checkSize(contact)) {
+            return trimContactList(contact);
+        }
+        return contact;
     }
 
     private List<Contact> getContact(final String regexp, int lastId) {
@@ -60,5 +69,13 @@ public class CustomRepositoryImpl implements CustomRepository {
                 .setCacheMode(CacheMode.IGNORE)
                 .setMaxResults(BATCH_MAX_RESULT)
                 .getResultList();
+    }
+
+    private boolean checkSize(final List<Contact> trimContact) {
+        return trimContact.size() == DEFAULT_PAGE_SIZE;
+    }
+
+    private List<Contact> trimContactList(final List<Contact> contactList) {
+        return contactList.subList(0, DEFAULT_PAGE_SIZE);
     }
 }

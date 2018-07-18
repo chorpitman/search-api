@@ -13,8 +13,6 @@ import java.util.List;
 
 @Service
 public class ContactServiceImpl implements ContactService {
-    private static final int DEFAULT_PAGE_SIZE = 20;
-
     @Autowired
     private ContactRepository contactRepository;
 
@@ -25,25 +23,13 @@ public class ContactServiceImpl implements ContactService {
     }
 
     private PageDto createPageDto(final List<Contact> contactList) {
-        if (contactList.size() <= DEFAULT_PAGE_SIZE) {
+        if (contactList.size() != 0) {
             return PageDto.builder()
                     .contacts(contactList)
                     .pageToken(contactList.get(contactList.size() - 1).getId())
                     .build();
         }
-
-        if (contactList.size() > DEFAULT_PAGE_SIZE) {
-            List<Contact> trimedList = trimContact(contactList);
-            return PageDto.builder()
-                    .contacts(trimedList)
-                    .pageToken(trimedList.get(trimedList.size() - 1).getId())
-                    .build();
-        }
-
         return null;
     }
 
-    private List<Contact> trimContact(final List<Contact> contactList) {
-        return contactList.subList(0, DEFAULT_PAGE_SIZE);
-    }
 }
